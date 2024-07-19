@@ -14,7 +14,7 @@ def request(f):
     return r
 
 
-class Overseerr(object):
+class Jellyseerr(object):
     """A class for handling connections with an Overseerr instance."""
 
     def __init__(self, ssl, username, host, port, urlbase="", api_key=None, password=None):
@@ -30,7 +30,7 @@ class Overseerr(object):
         self._applicationUrl = None
 
     def test_connection(self):
-        print("Testing connection to Overseerr @", self._base_url)
+        print("Testing connection to Jellyseerr @", self._base_url)
         settings = self._request_connection(path="Settings/Main").json()
         if (settings['applicationUrl'] == ""):
             return self._app_base
@@ -61,22 +61,29 @@ class Overseerr(object):
             return res
 
         except TypeError:
-            raise OverseerrError("No authentication type set.")
+            raise JellyseerError("No authentication type set.")
+            #raise OverseerrError("No authentication type set.")
         except requests.exceptions.Timeout:
-            raise OverseerrError(
-                "Request timed out. Check port configuration.")
+            raise JellyseerError("Request timed out. Please check your port configuration.")
+            #raise OverseerrError(
+            #    "Request timed out. Check port configuration.")
         except requests.exceptions.ConnectionError:
-            raise OverseerrError("Connection error. Check host configuration.")
+            raise JellyseerError("Connection error. Check the configuration of your Host.")
+            #raise OverseerrError("Connection error. Check host configuration.")
         except requests.exceptions.TooManyRedirects:
-            raise OverseerrError("Too many redirects.")
+            raise JellyseerError("Too many redirects.")
+            #raise OverseerrError("Too many redirects.")
         except requests.exceptions.HTTPError as err:
             status = err.response.status_code
             if status == 401:
-                raise OverseerrError("Unauthorized error. Check authentication credentials.")
+                raise JellyseerError("Unauthorized! Check your authentication credentials.")
+                #raise OverseerrError("Unauthorized error. Check authentication credentials.")
             else:
-                raise OverseerrError(f"HTTP Error {status}. {res.json()}")
+                raise JellyseerError(f"HTTP Error {status}. {res.json()}")
+                #raise OverseerrError(f"HTTP Error {status}. {res.json()}")
         except ValueError:
-            raise OverseerrError("ValueError. Check urlbase configuration.")
+            raise JellyseerError("Value Error. Check urlbase configuration.")
+            #raise OverseerrError("ValueError. Check urlbase configuration.")
 
     def authenticate(self):
 
