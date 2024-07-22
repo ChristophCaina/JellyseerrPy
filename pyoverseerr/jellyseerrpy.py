@@ -7,7 +7,6 @@ _LOGGER = logging.getLogger(__name__)
 _BASE_URL = "http{ssl}://{host}:{port}/{urlbase}api/v1/"
 _TAKE_COUNT = 1000
 
-
 def request(f):
     r = f().json()
     print("return:", r)
@@ -15,7 +14,7 @@ def request(f):
 
 
 class Jellyseerr(object):
-    """A class for handling connections with an Overseerr instance."""
+    """A class for handling connections with an Jellyseerr instance."""
 
     def __init__(self, ssl, username, host, port, urlbase="", api_key=None, password=None):
 
