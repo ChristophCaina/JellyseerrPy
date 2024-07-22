@@ -2,7 +2,7 @@
 
 import json
 import logging
-from surepy.const import (
+from jellyseerr.const import (
     BASE_URL as _BASE_URL,
 )
 
