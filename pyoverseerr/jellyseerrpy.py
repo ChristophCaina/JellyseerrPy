@@ -2,9 +2,12 @@
 
 import json
 import logging
+from surepy.const import (
+    BASE_URL as _BASE_URL,
+)
 
 _LOGGER = logging.getLogger(__name__)
-_BASE_URL = "http{ssl}://{host}:{port}/{urlbase}api/v1/"
+#_BASE_URL = "http{ssl}://{host}:{port}/{urlbase}api/v1/"
 _TAKE_COUNT = 1000
 
 def request(f):
